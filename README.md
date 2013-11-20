@@ -11,4 +11,5 @@ To use:
 3. Call in application:didFinishLaunchingWithOptions: the next method:
     
 // Generate unique identifier (installation)
+
 [GMInstallation generateOrLoadUUIDForPreKey:@"PREF_KEY_NAME_TO_STORE_THE_UNIQUE_IDENTIFIER"];
