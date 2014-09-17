@@ -10,7 +10,12 @@
 
 @interface GMInstallation : NSObject
 
-// Generate or load an unique identifier and save to disk
+/**
+ * Generate or load from KeyChain a new uniqueID and save to disk (PrefKey)
+ *
+ * @param prefKeyName A NSString with the PrefKey name that will be used to store the unique identifier
+ * @return
+ */
 + (void)generateOrLoadUUIDForPreKey:(NSString *)prefKeyName;
 
 @end

@@ -11,12 +11,6 @@
 
 @implementation GMInstallation
 
-/**
- * Generate or load from KeyChain a new uniqueID and save to disk (PrefKey)
- *
- * @param prefKeyName A NSString with the PrefKey name that will be used to store the unique identifier
- * @return
- */
 + (void)generateOrLoadUUIDForPreKey:(NSString *)prefKeyName
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -34,20 +28,8 @@
     // Finally, if no value again, generate it
     if (![UUID length] > 0)
     {
-        // If the system version is less than 6.0, use CFUUIDRef to generate uniqueId
-        float iOSVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
-        if (iOSVersion < 6.0f)
-        {
-            CFUUIDRef theUUID = CFUUIDCreate(NULL);
-            CFStringRef string = CFUUIDCreateString(NULL, theUUID);
-            CFRelease(theUUID);
-            UUID = [(__bridge NSString*)string stringByReplacingOccurrencesOfString:@"-" withString:@""];
-        }
         // If the system version is greater or equal than 6.0, use identifierForVendor
-        else
-        {
-            UUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-        }
+        UUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         
         // Save it to the preferences and to the keychain
         [userDefaults setObject:UUID forKey:prefKeyName];
